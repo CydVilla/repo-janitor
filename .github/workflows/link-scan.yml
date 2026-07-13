@@ -1,0 +1,46 @@
+name: Link scan
+
+on:
+  schedule:
+    - cron: '17 6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: link-scan
+  cancel-in-progress: false
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Scan links
+        run: npm run links
+        env:
+          JANITOR_TOKEN: ${{ secrets.JANITOR_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASS: ${{ secrets.SMTP_PASS }}
+          MAIL_FROM: ${{ secrets.MAIL_FROM }}
+      - name: Commit link history
+        # Runs even when a repo errored: healthy repos already wrote fresh
+        # history, and losing it would stall failThreshold counting for everyone.
+        if: ${{ !cancelled() }}
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data/
+          # Rebase first: a human push to main during the multi-minute scan
+          # would otherwise reject this push and drop the run's history.
+          git diff --cached --quiet || (git commit -m 'chore: update link history [skip ci]' && git pull --rebase origin "$GITHUB_REF_NAME" && git push)

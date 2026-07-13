@@ -1,0 +1,29 @@
+{
+  "name": "repo-janitor",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "GitHub-only repo hygiene hub: dead-link monitoring with per-link health history, and Knip-powered dead-code cleanup PRs for onboarded repos.",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "links": "tsx src/run-links.ts",
+    "deadcode": "tsx src/run-deadcode.ts"
+  },
+  "dependencies": {
+    "@octokit/rest": "^22.0.1",
+    "fast-glob": "^3.3.3",
+    "nodemailer": "^9.0.3",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@types/node": "^26.1.1",
+    "@types/nodemailer": "^8.0.1",
+    "tsx": "^4.23.0",
+    "typescript": "^7.0.2",
+    "vitest": "^4.1.10"
+  }
+}

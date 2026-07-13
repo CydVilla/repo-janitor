@@ -1,0 +1,9 @@
+{
+  "repos": [
+    {
+      "repo": "YOUR-GITHUB-USER/your-repo",
+      "links": { "enabled": true, "report": "issue" },
+      "deadCode": { "enabled": false, "openPRs": true }
+    }
+  ]
+}

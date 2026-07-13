@@ -1,0 +1,37 @@
+name: Dead code sweep
+
+on:
+  schedule:
+    - cron: '23 7 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: dead-code
+  cancel-in-progress: false
+
+jobs:
+  sweep:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Require JANITOR_TOKEN
+        env:
+          JANITOR_TOKEN: ${{ secrets.JANITOR_TOKEN }}
+        run: |
+          if [ -z "$JANITOR_TOKEN" ]; then
+            echo "::error::The JANITOR_TOKEN secret is not set. The dead-code sweep pushes branches and opens PRs in target repos, which the default workflow token cannot do. Create a fine-grained PAT with Contents (read/write), Issues (read/write), Pull requests (read/write) and Metadata (read) on the target repos, then add it as an Actions secret named JANITOR_TOKEN."
+            exit 1
+          fi
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Dead code sweep
+        run: npm run deadcode
+        env:
+          JANITOR_TOKEN: ${{ secrets.JANITOR_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
