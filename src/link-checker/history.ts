@@ -147,6 +147,14 @@ export async function saveHistory(dataDir: string, history: RepoLinkHistory): Pr
     if (record) links[url] = record;
   }
   const stable: RepoLinkHistory = { repo: history.repo, updatedAt: history.updatedAt, links };
+  if (history.falsePositives && Object.keys(history.falsePositives).length > 0) {
+    const falsePositives: NonNullable<RepoLinkHistory['falsePositives']> = {};
+    for (const url of Object.keys(history.falsePositives).sort()) {
+      const report = history.falsePositives[url];
+      if (report) falsePositives[url] = report;
+    }
+    stable.falsePositives = falsePositives;
+  }
 
   await mkdir(path.dirname(filePath), { recursive: true });
   await writeFile(filePath, `${JSON.stringify(stable, null, 2)}\n`, 'utf8');

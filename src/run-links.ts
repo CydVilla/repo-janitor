@@ -19,6 +19,7 @@ if (results.length === 0) {
       ok: r.summary.ok,
       failing: r.summary.failing,
       broken: r.summary.broken,
+      suppressed: r.summary.suppressed,
       issue: r.issueUrl ?? '',
       emailed: r.emailedTo.join(', '),
       error: r.error ?? '',

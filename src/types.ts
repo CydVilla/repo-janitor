@@ -101,6 +101,23 @@ export interface RepoLinkHistory {
   repo: string;
   updatedAt: string;
   links: Record<string, LinkRecord>;
+  /**
+   * URLs reported as false positives (keyed by URL). A marked link is still
+   * checked and tracked, but its failures are suppressed from the report's
+   * broken/failing sections until the mark is removed.
+   */
+  falsePositives?: Record<string, FalsePositiveReport>;
+}
+
+/** A human report that a link is wrongly flagged, read from issue comments. */
+export interface FalsePositiveReport {
+  url: string;
+  /** GitHub login of the comment author. */
+  reportedBy: string;
+  /** ISO timestamp of the comment. */
+  reportedAt: string;
+  /** Link to the comment carrying the directive, when known. */
+  commentUrl?: string;
 }
 
 export interface LinkReportSummary {
@@ -108,6 +125,8 @@ export interface LinkReportSummary {
   ok: number;
   failing: number;
   broken: number;
+  /** Failing/broken links hidden because they were reported as false positives. */
+  suppressed: number;
 }
 
 // ---------------------------------------------------------------------------

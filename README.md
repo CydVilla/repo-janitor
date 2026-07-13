@@ -77,6 +77,33 @@ History lives in this repo under `data/links/<owner>__<name>.json`, one file per
 
 For each repo with `links.report: "issue"`, the scan upserts a single issue titled **🔗 Link health report** (label `repo-janitor`) *in the target repo* — updated in place on every scan, never duplicated. **Subscribe to that issue** and GitHub emails you every update; that is the whole email story by design.
 
+### Reporting false positives
+
+Sometimes the checker is wrong — a link sits behind a VPN or a paywall, blocks
+automated clients, or only answers from certain regions. Comment on the report
+issue to tell the janitor so:
+
+```
+/false-positive https://intranet.example.com/handbook
+```
+
+From the next scan on, that URL is dropped from the broken/failing sections and
+listed under **Suppressed false positives** instead (with who reported it and
+when), and the summary counts it as *suppressed*. The link is still checked and
+its history still accumulates — only the reporting is muted. `/fp <url>` works
+as a shorthand, the URL may be wrapped in backticks or `<angle brackets>`, and
+one comment can carry several directives (one per line).
+
+To un-suppress a link, comment `/not-false-positive <url>` (or `/not-fp <url>`),
+or simply delete the marking comment — the suppression list is rebuilt from the
+live comment thread on every scan, so the latest directive per URL wins. Marks
+for URLs that disappear from the repo are pruned automatically, and a marked
+link that is currently **ok** is reported as ok; the mark only mutes failures.
+
+Note that anyone who can comment on the issue can suppress a link. That matches
+the trust model of the report issue itself (it lives in the target repo), and
+every suppression is visibly attributed in the report.
+
 If you want real, direct email on top of that, set these Actions secrets and list recipients in `links.email`: `SMTP_HOST`, `SMTP_PORT` (optional, default 465), `SMTP_USER`, `SMTP_PASS`, `MAIL_FROM`. Without them, email delivery is entirely inert.
 
 ## Dead code
@@ -112,7 +139,7 @@ Both commands print a per-repo results table and exit non-zero only when the sca
 
 - **GitHub API rate limits.** Every issue upsert and PR uses your PAT's quota (5,000 requests/hour). Fine for dozens of repos; hundreds may need staggered schedules.
 - **Link-checking politeness.** Requests to the same host are serialized with a small delay, HEAD is tried before GET, and 429 responses count as *alive*. Still, very hot-tempered hosts may throttle you; add them to `ignoreUrlPatterns` if they cause noise.
-- **False positives.** Transient outages are absorbed by `failThreshold` — a link must fail several *scans in a row* (days, not seconds) before being called broken. Raise the threshold per repo if a host is chronically flaky.
+- **False positives.** Transient outages are absorbed by `failThreshold` — a link must fail several *scans in a row* (days, not seconds) before being called broken. Raise the threshold per repo if a host is chronically flaky, and suppress individual wrongly-flagged links by commenting `/false-positive <url>` on the report issue (see [Reporting false positives](#reporting-false-positives)).
 - **Knip caveats.** Knip's analysis is static: dynamic `import()` with computed paths, reflection, string-keyed lookups, and framework magic can make live code look dead. The verification gate catches what your type-checker and tests catch — **review janitor PRs before merging**, especially in repos with thin test coverage.
 - **Yarn Berry.** Yarn 2+ repos are installed with `yarn install --immutable` and lifecycle scripts disabled via `YARN_ENABLE_SCRIPTS=0`. If you onboard a Berry repo, add a `corepack enable` step to `dead-code.yml` so the runner can use the repo's pinned Yarn version.
 - **The janitor keeps itself clean.** Dependabot (`.github/dependabot.yml`) opens one grouped PR per week for npm dependency updates and another for the action versions pinned in the workflows; CI validates both before you merge.

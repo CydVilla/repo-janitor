@@ -97,11 +97,23 @@ function lineIndex(report: string, line: string): number {
 
 describe('summarize', () => {
   it('returns all zeros for an empty history', () => {
-    expect(summarize(historyOf([]))).toEqual({ total: 0, ok: 0, failing: 0, broken: 0 });
+    expect(summarize(historyOf([]))).toEqual({
+      total: 0,
+      ok: 0,
+      failing: 0,
+      broken: 0,
+      suppressed: 0,
+    });
   });
 
   it('counts links by state and totals them', () => {
-    expect(summarize(mixedHistory())).toEqual({ total: 5, ok: 1, failing: 1, broken: 3 });
+    expect(summarize(mixedHistory())).toEqual({
+      total: 5,
+      ok: 1,
+      failing: 1,
+      broken: 3,
+      suppressed: 0,
+    });
   });
 
   it('counts every state independently', () => {
@@ -114,7 +126,45 @@ describe('summarize', () => {
         }),
       ),
     );
-    expect(summarize(history)).toEqual({ total: 6, ok: 3, failing: 1, broken: 2 });
+    expect(summarize(history)).toEqual({
+      total: 6,
+      ok: 3,
+      failing: 1,
+      broken: 2,
+      suppressed: 0,
+    });
+  });
+
+  it('counts failing/broken false positives as suppressed instead of their state', () => {
+    const history = historyOf(
+      [
+        record('https://fp-broken.example.com/', { state: 'broken', lastOkAt: null }),
+        record('https://fp-ok.example.com/'),
+        record('https://plain-broken.example.com/', { state: 'broken', lastOkAt: null }),
+      ],
+      {
+        falsePositives: {
+          'https://fp-broken.example.com/': {
+            url: 'https://fp-broken.example.com/',
+            reportedBy: 'octocat',
+            reportedAt: SCANNED_AT,
+          },
+          // Currently ok: the mark is dormant and the link counts as ok.
+          'https://fp-ok.example.com/': {
+            url: 'https://fp-ok.example.com/',
+            reportedBy: 'octocat',
+            reportedAt: SCANNED_AT,
+          },
+        },
+      },
+    );
+    expect(summarize(history)).toEqual({
+      total: 3,
+      ok: 1,
+      failing: 0,
+      broken: 1,
+      suppressed: 1,
+    });
   });
 });
 
@@ -127,9 +177,9 @@ describe('renderLinkReport', () => {
         '',
         'Scanned at 2026-03-05T12:00:00Z.',
         '',
-        '| Total | OK | Failing | Broken |',
-        '| ---: | ---: | ---: | ---: |',
-        '| 0 | 0 | 0 | 0 |',
+        '| Total | OK | Failing | Broken | Suppressed |',
+        '| ---: | ---: | ---: | ---: | ---: |',
+        '| 0 | 0 | 0 | 0 | 0 |',
         '',
         '## Broken links',
         '',
@@ -139,12 +189,21 @@ describe('renderLinkReport', () => {
         '',
         'None.',
         '',
+        '## Suppressed false positives',
+        '',
+        'None.',
+        '',
         '<details>',
         '<summary>All tracked links (0)</summary>',
         '',
         'None.',
         '',
         '</details>',
+        '',
+        '---',
+        '',
+        'Wrongly flagged link? Comment `/false-positive <url>` on this issue and the next',
+        'scan stops reporting it as dead. Undo with `/not-false-positive <url>`.',
         '',
       ].join('\n'),
     );
@@ -158,9 +217,9 @@ describe('renderLinkReport', () => {
         '',
         'Scanned at 2026-03-05T12:00:00Z.',
         '',
-        '| Total | OK | Failing | Broken |',
-        '| ---: | ---: | ---: | ---: |',
-        '| 5 | 1 | 1 | 3 |',
+        '| Total | OK | Failing | Broken | Suppressed |',
+        '| ---: | ---: | ---: | ---: | ---: |',
+        '| 5 | 1 | 1 | 3 | 0 |',
         '',
         '## Broken links',
         '',
@@ -176,6 +235,10 @@ describe('renderLinkReport', () => {
         '| --- | --- | --- | ---: | --- |',
         '| https://flaky.example.com/?a=1\\|b=2 | 503 | 2026-03-04T00:00:00Z | 1 | `docs/a\\|b.md:7` |',
         '',
+        '## Suppressed false positives',
+        '',
+        'None.',
+        '',
         '<details>',
         '<summary>All tracked links (5)</summary>',
         '',
@@ -189,6 +252,11 @@ describe('renderLinkReport', () => {
         '',
         '</details>',
         '',
+        '---',
+        '',
+        'Wrongly flagged link? Comment `/false-positive <url>` on this issue and the next',
+        'scan stops reporting it as dead. Undo with `/not-false-positive <url>`.',
+        '',
       ].join('\n'),
     );
   });
@@ -198,8 +266,87 @@ describe('renderLinkReport', () => {
     const summary = summarize(history);
     const report = renderLinkReport(history);
     expect(report).toContain(
-      `| ${summary.total} | ${summary.ok} | ${summary.failing} | ${summary.broken} |`,
+      `| ${summary.total} | ${summary.ok} | ${summary.failing} | ${summary.broken} | ${summary.suppressed} |`,
     );
+  });
+
+  describe('suppressed false positives', () => {
+    function markedHistory(): RepoLinkHistory {
+      const history = mixedHistory();
+      history.falsePositives = {
+        'https://old.example.com/': {
+          url: 'https://old.example.com/',
+          reportedBy: 'octocat',
+          reportedAt: '2026-03-02T10:00:00.000Z',
+          commentUrl: 'https://github.com/octo/site/issues/1#issuecomment-99',
+        },
+      };
+      return history;
+    }
+
+    it('moves a marked broken link out of the broken table into the suppressed table', () => {
+      const report = renderLinkReport(markedHistory());
+      const lines = report.split('\n');
+      const brokenHeader = lineIndex(report, '## Broken links');
+      const suppressedHeader = lineIndex(report, '## Suppressed false positives');
+      const row = lines.findIndex((l) => l.startsWith('| https://old.example.com/'));
+      expect(row).toBeGreaterThan(suppressedHeader);
+      const brokenSection = lines.slice(brokenHeader, suppressedHeader).join('\n');
+      expect(brokenSection).not.toContain('https://old.example.com/');
+    });
+
+    it('shows the reporter as a link to the marking comment, and the report date', () => {
+      const report = renderLinkReport(markedHistory());
+      expect(report).toContain(
+        '| https://old.example.com/ | broken | 404 | ' +
+          '[@octocat](https://github.com/octo/site/issues/1#issuecomment-99) | 2026-03-02T10:00:00Z |',
+      );
+    });
+
+    it('shows a plain @login when the report has no comment URL', () => {
+      const history = markedHistory();
+      delete history.falsePositives?.['https://old.example.com/']?.commentUrl;
+      const report = renderLinkReport(history);
+      expect(report).toContain('| @octocat | 2026-03-02T10:00:00Z |');
+    });
+
+    it('reflects the suppression in the summary table', () => {
+      const report = renderLinkReport(markedHistory());
+      expect(report).toContain('| 5 | 1 | 1 | 2 | 1 |');
+    });
+
+    it('leaves a marked link alone while it is ok', () => {
+      const history = historyOf([record('https://fine.example.com/')], {
+        falsePositives: {
+          'https://fine.example.com/': {
+            url: 'https://fine.example.com/',
+            reportedBy: 'octocat',
+            reportedAt: SCANNED_AT,
+          },
+        },
+      });
+      const report = renderLinkReport(history);
+      const lines = report.split('\n');
+      const suppressedHeader = lineIndex(report, '## Suppressed false positives');
+      expect(lines[suppressedHeader + 2]).toBe('None.');
+      expect(report).toContain('| 1 | 1 | 0 | 0 | 0 |');
+    });
+
+    it('suppresses failing links too', () => {
+      const history = mixedHistory();
+      history.falsePositives = {
+        'https://flaky.example.com/?a=1|b=2': {
+          url: 'https://flaky.example.com/?a=1|b=2',
+          reportedBy: 'octocat',
+          reportedAt: SCANNED_AT,
+        },
+      };
+      const report = renderLinkReport(history);
+      const lines = report.split('\n');
+      const failingHeader = lineIndex(report, '## Failing (not yet confirmed broken)');
+      expect(lines[failingHeader + 2]).toBe('None.');
+      expect(report).toContain('| 5 | 1 | 0 | 3 | 1 |');
+    });
   });
 
   describe('broken table ordering (longest dead first)', () => {
