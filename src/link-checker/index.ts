@@ -6,6 +6,7 @@ import { emailConfigured, sendReportEmail } from '../reporting/email.js';
 import { upsertReportIssue } from '../reporting/issue.js';
 import { checkLinks } from './check.js';
 import { extractLinks } from './extract.js';
+import { fetchFalsePositiveReports, pruneFalsePositives } from './false-positives.js';
 import { loadHistory, mergeOutcomes, saveHistory } from './history.js';
 import { renderLinkReport, summarize } from './report.js';
 
@@ -53,7 +54,7 @@ async function scanOneRepo(
 ): Promise<LinkScanRunResult> {
   const result: LinkScanRunResult = {
     repo: repoConfig.repo,
-    summary: { total: 0, ok: 0, failing: 0, broken: 0 },
+    summary: { total: 0, ok: 0, failing: 0, broken: 0, suppressed: 0 },
     emailedTo: [],
   };
 
@@ -72,6 +73,26 @@ async function scanOneRepo(
     const history = mergeOutcomes(previous, repoConfig.repo, extracted, outcomes, {
       failThreshold: repoConfig.links.failThreshold,
     });
+
+    // False-positive reports live as `/false-positive <url>` comments on the
+    // report issue; rebuild the suppression map from the live thread each run
+    // so marking, unmarking, and comment deletion all take effect on the next
+    // scan. When the thread can't be read (or there is no report issue), fall
+    // back to the map persisted by the previous run rather than un-suppressing
+    // everything.
+    let falsePositives = previous?.falsePositives ?? {};
+    if (repoConfig.links.report === 'issue') {
+      try {
+        falsePositives = await fetchFalsePositiveReports(getOctokit(), repoConfig.repo, ISSUE_TITLE);
+      } catch (err) {
+        const detail = err instanceof Error ? err.message : String(err);
+        console.warn(
+          `[link-scan] ${repoConfig.repo}: could not read false-positive reports, ` +
+            `keeping previous ones: ${detail}`,
+        );
+      }
+    }
+    history.falsePositives = pruneFalsePositives(falsePositives, history.links);
 
     result.historyPath = await saveHistory(dataDir, history);
     result.summary = summarize(history);
@@ -108,13 +129,13 @@ async function appendStepSummary(results: LinkScanRunResult[]): Promise<void> {
   const lines = [
     '## 🔗 Link scan',
     '',
-    '| Repo | Total | OK | Failing | Broken | Report | Error |',
-    '| --- | ---: | ---: | ---: | ---: | --- | --- |',
+    '| Repo | Total | OK | Failing | Broken | Suppressed | Report | Error |',
+    '| --- | ---: | ---: | ---: | ---: | ---: | --- | --- |',
   ];
   for (const r of results) {
     const report = r.issueUrl ? `[issue](${r.issueUrl})` : '—';
     lines.push(
-      `| ${r.repo} | ${r.summary.total} | ${r.summary.ok} | ${r.summary.failing} | ${r.summary.broken} | ${report} | ${mdCell(r.error)} |`,
+      `| ${r.repo} | ${r.summary.total} | ${r.summary.ok} | ${r.summary.failing} | ${r.summary.broken} | ${r.summary.suppressed} | ${report} | ${mdCell(r.error)} |`,
     );
   }
   await appendFile(summaryPath, lines.join('\n') + '\n\n');

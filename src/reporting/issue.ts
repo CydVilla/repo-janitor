@@ -26,6 +26,22 @@ async function listOpenCandidates(octokit: Octokit, owner: string, repo: string)
 }
 
 /**
+ * Find the OPEN issue (never a PR) in the target repo with this exact title,
+ * searching issues carrying the 'repo-janitor' label. Returns null when no
+ * such issue exists.
+ */
+export async function findOpenReportIssue(
+  octokit: Octokit,
+  targetRepo: string,
+  title: string,
+): Promise<{ number: number; url: string } | null> {
+  const { owner, name } = parseRepo(targetRepo);
+  const candidates = await listOpenCandidates(octokit, owner, name);
+  const existing = candidates.find((issue) => issue.title === title && !issue.pull_request);
+  return existing ? { number: existing.number, url: existing.html_url } : null;
+}
+
+/**
  * Find an OPEN issue in the target repo with this exact title (searching
  * issues carrying the 'repo-janitor' label) and update its body; otherwise
  * create it with the label. Never creates duplicates.

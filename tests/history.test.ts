@@ -324,6 +324,26 @@ describe('loadHistory / saveHistory', () => {
     ]);
   });
 
+  it('round-trips falsePositives with sorted keys, omitting the field when empty', async () => {
+    const dir = await tmpDir();
+    const fp = (url: string) => ({ url, reportedBy: 'octocat', reportedAt: T1 });
+    const history: RepoLinkHistory = {
+      repo: REPO,
+      updatedAt: T2,
+      links: { [URL_B]: record(URL_B), [URL_A]: record(URL_A) },
+      falsePositives: { [URL_B]: fp(URL_B), [URL_A]: fp(URL_A) },
+    };
+
+    const filePath = await saveHistory(dir, history);
+    const parsed = JSON.parse(await readFile(filePath, 'utf8')) as RepoLinkHistory;
+    expect(Object.keys(parsed.falsePositives ?? {})).toEqual([URL_A, URL_B].sort());
+    await expect(loadHistory(dir, REPO)).resolves.toEqual(history);
+
+    await saveHistory(dir, { ...history, falsePositives: {} });
+    const withoutFp = await readFile(filePath, 'utf8');
+    expect(withoutFp).not.toContain('falsePositives');
+  });
+
   it('is byte-stable across save -> load -> save', async () => {
     const dir = await tmpDir();
     const history: RepoLinkHistory = {
