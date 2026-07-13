@@ -24,8 +24,8 @@ jobs:
             echo "::error::The JANITOR_TOKEN secret is not set. The dead-code sweep pushes branches and opens PRs in target repos, which the default workflow token cannot do. Create a fine-grained PAT with Contents (read/write), Issues (read/write), Pull requests (read/write) and Metadata (read) on the target repos, then add it as an Actions secret named JANITOR_TOKEN."
             exit 1
           fi
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v6
         with:
           node-version: 22
           cache: npm
