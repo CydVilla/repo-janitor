@@ -10,7 +10,8 @@
           "127\\.0\\.0\\.1",
           "/xrpc/",
           "api\\.resend\\.com",
-          "your-app\\."
+          "your-app\\.",
+          "trend-cart-[a-z0-9]+\\.herokuapp\\.com"
         ]
       },
       "deadCode": {
