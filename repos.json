@@ -1,9 +1,28 @@
 {
   "repos": [
     {
-      "repo": "YOUR-GITHUB-USER/your-repo",
-      "links": { "enabled": true, "report": "issue" },
-      "deadCode": { "enabled": false, "openPRs": true }
+      "repo": "CydVilla/trend-cart",
+      "links": {
+        "enabled": true,
+        "ignoreUrlPatterns": [
+          "amazon\\.",
+          "localhost",
+          "127\\.0\\.0\\.1",
+          "/xrpc/",
+          "api\\.resend\\.com",
+          "your-app\\."
+        ]
+      },
+      "deadCode": {
+        "enabled": true,
+        "openPRs": true,
+        "verifyCommands": [
+          "pnpm install --frozen-lockfile",
+          "pnpm --filter @trendcart/db exec prisma generate",
+          "pnpm -r typecheck",
+          "pnpm lint"
+        ]
+      }
     }
   ]
 }
