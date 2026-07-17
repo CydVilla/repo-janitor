@@ -1,0 +1,171 @@
+{
+  "repo": "CydVilla/trend-cart",
+  "updatedAt": "2026-07-17T07:05:24.554Z",
+  "links": {
+    "https://bsky.app/profile/did:plc:xyz/post/rkey": {
+      "url": "https://bsky.app/profile/did:plc:xyz/post/rkey",
+      "state": "failing",
+      "firstSeenAt": "2026-07-17T07:05:24.554Z",
+      "lastCheckedAt": "2026-07-17T07:05:24.554Z",
+      "lastOkAt": null,
+      "lastStatusCode": 404,
+      "consecutiveFailures": 1,
+      "totalChecks": 1,
+      "totalFailures": 1,
+      "occurrences": [
+        {
+          "file": "apps/web/app/(dashboard)/ui.tsx",
+          "line": 76
+        }
+      ],
+      "history": [
+        {
+          "at": "2026-07-17T07:05:23.948Z",
+          "ok": false,
+          "statusCode": 404
+        }
+      ]
+    },
+    "https://bsky.app/profile/trend-cart.bsky.social": {
+      "url": "https://bsky.app/profile/trend-cart.bsky.social",
+      "state": "failing",
+      "firstSeenAt": "2026-07-17T07:05:24.554Z",
+      "lastCheckedAt": "2026-07-17T07:05:24.554Z",
+      "lastOkAt": null,
+      "lastStatusCode": 404,
+      "consecutiveFailures": 1,
+      "totalChecks": 1,
+      "totalFailures": 1,
+      "occurrences": [
+        {
+          "file": "apps/web/app/about/page.tsx",
+          "line": 18
+        }
+      ],
+      "history": [
+        {
+          "at": "2026-07-17T07:05:24.381Z",
+          "ok": false,
+          "statusCode": 404
+        }
+      ]
+    },
+    "https://bsky.social": {
+      "url": "https://bsky.social",
+      "state": "ok",
+      "firstSeenAt": "2026-07-17T07:05:24.554Z",
+      "lastCheckedAt": "2026-07-17T07:05:24.554Z",
+      "lastOkAt": "2026-07-17T07:05:24.554Z",
+      "lastStatusCode": 200,
+      "consecutiveFailures": 0,
+      "totalChecks": 1,
+      "totalFailures": 0,
+      "occurrences": [
+        {
+          "file": "apps/worker/src/deals/poster.ts",
+          "line": 72
+        },
+        {
+          "file": "apps/worker/src/discover.ts",
+          "line": 171
+        },
+        {
+          "file": "apps/worker/src/notifications.ts",
+          "line": 79
+        },
+        {
+          "file": "apps/worker/src/poster.ts",
+          "line": 77
+        },
+        {
+          "file": "apps/worker/src/radar.ts",
+          "line": 119
+        }
+      ],
+      "history": [
+        {
+          "at": "2026-07-17T07:05:24.347Z",
+          "ok": true,
+          "statusCode": 200
+        }
+      ],
+      "redirectedTo": "https://bsky.social/about"
+    },
+    "https://keepachangelog.com": {
+      "url": "https://keepachangelog.com",
+      "state": "ok",
+      "firstSeenAt": "2026-07-17T07:05:24.554Z",
+      "lastCheckedAt": "2026-07-17T07:05:24.554Z",
+      "lastOkAt": "2026-07-17T07:05:24.554Z",
+      "lastStatusCode": 200,
+      "consecutiveFailures": 0,
+      "totalChecks": 1,
+      "totalFailures": 0,
+      "occurrences": [
+        {
+          "file": "CHANGELOG.md",
+          "line": 4
+        }
+      ],
+      "history": [
+        {
+          "at": "2026-07-17T07:05:23.794Z",
+          "ok": true,
+          "statusCode": 200
+        }
+      ]
+    },
+    "https://resend.com": {
+      "url": "https://resend.com",
+      "state": "ok",
+      "firstSeenAt": "2026-07-17T07:05:24.554Z",
+      "lastCheckedAt": "2026-07-17T07:05:24.554Z",
+      "lastOkAt": "2026-07-17T07:05:24.554Z",
+      "lastStatusCode": 200,
+      "consecutiveFailures": 0,
+      "totalChecks": 1,
+      "totalFailures": 0,
+      "occurrences": [
+        {
+          "file": "apps/worker/src/notify.ts",
+          "line": 10
+        }
+      ],
+      "history": [
+        {
+          "at": "2026-07-17T07:05:23.928Z",
+          "ok": true,
+          "statusCode": 200
+        }
+      ]
+    },
+    "https://slickdeals.net/newsearch.php?mode=frontpage&searcharea=deals&searchin=first&rss=1": {
+      "url": "https://slickdeals.net/newsearch.php?mode=frontpage&searcharea=deals&searchin=first&rss=1",
+      "state": "ok",
+      "firstSeenAt": "2026-07-17T07:05:24.554Z",
+      "lastCheckedAt": "2026-07-17T07:05:24.554Z",
+      "lastOkAt": "2026-07-17T07:05:24.554Z",
+      "lastStatusCode": 200,
+      "consecutiveFailures": 0,
+      "totalChecks": 1,
+      "totalFailures": 0,
+      "occurrences": [
+        {
+          "file": "apps/web/app/(dashboard)/deals/page.tsx",
+          "line": 611
+        },
+        {
+          "file": "packages/db/prisma/seed.ts",
+          "line": 257
+        }
+      ],
+      "history": [
+        {
+          "at": "2026-07-17T07:05:24.553Z",
+          "ok": true,
+          "statusCode": 200
+        }
+      ]
+    }
+  }
+}
