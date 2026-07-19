@@ -2,6 +2,8 @@ import type { Octokit } from '@octokit/rest';
 import { parseRepo } from '../github.js';
 
 const JANITOR_LABEL = 'repo-janitor';
+const LABEL_COLOR = 'ededed';
+const LABEL_DESCRIPTION = 'Automated reports from the repo-janitor hub';
 
 interface IssueLite {
   number: number;
@@ -69,14 +71,50 @@ export async function upsertReportIssue(
     return { url: existing.html_url, created: false };
   }
 
-  // GitHub auto-creates missing labels on issue creation when the token has
-  // push access, so passing the labels array here needs no pre-check.
-  const created = await octokit.issues.create({
-    owner,
-    repo: name,
-    title: opts.title,
-    body: opts.body,
-    labels: [JANITOR_LABEL, ...(opts.labels ?? [])],
-  });
-  return { url: created.data.html_url, created: true };
+  // Classic push tokens auto-create missing labels on issue creation, but
+  // fine-grained PATs reject them with 422 "Label invalid" — so ensure the
+  // labels exist first, and as a last resort file the report unlabeled.
+  const labels = [JANITOR_LABEL, ...(opts.labels ?? [])];
+  for (const label of labels) {
+    await ensureLabelExists(octokit, owner, name, label);
+  }
+
+  const params = { owner, repo: name, title: opts.title, body: opts.body };
+  try {
+    const created = await octokit.issues.create({ ...params, labels });
+    return { url: created.data.html_url, created: true };
+  } catch (err) {
+    if (!isLabelValidationError(err)) throw err;
+    const created = await octokit.issues.create(params);
+    return { url: created.data.html_url, created: true };
+  }
+}
+
+async function ensureLabelExists(
+  octokit: Octokit,
+  owner: string,
+  repo: string,
+  label: string,
+): Promise<void> {
+  try {
+    await octokit.issues.getLabel({ owner, repo, name: label });
+  } catch {
+    try {
+      await octokit.issues.createLabel({
+        owner,
+        repo,
+        name: label,
+        color: LABEL_COLOR,
+        description: LABEL_DESCRIPTION,
+      });
+    } catch {
+      // Racing another run, or the token can't manage labels — the unlabeled
+      // fallback in upsertReportIssue keeps the report itself flowing.
+    }
+  }
+}
+
+function isLabelValidationError(err: unknown): boolean {
+  const e = err as { status?: number; message?: string };
+  return e?.status === 422 && /"resource"\s*:\s*"Label"/.test(e?.message ?? '');
 }
