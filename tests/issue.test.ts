@@ -9,7 +9,23 @@ interface FakeIssue {
   pull_request?: object;
 }
 
-function fakeOctokit(issues: FakeIssue[], opts: { failLabelFilter?: boolean } = {}) {
+function labelValidationError() {
+  const err = new Error(
+    'Validation Failed: {"value":"repo-janitor","resource":"Label","field":"name","code":"invalid"}',
+  ) as Error & { status: number };
+  err.status = 422;
+  return err;
+}
+
+function fakeOctokit(
+  issues: FakeIssue[],
+  opts: {
+    failLabelFilter?: boolean;
+    existingLabels?: string[];
+    failCreateLabel?: boolean;
+    failCreateWithLabels?: boolean;
+  } = {},
+) {
   const listForRepo = vi.fn(async (params: { labels?: string }) => {
     if (opts.failLabelFilter && params.labels !== undefined) {
       throw new Error('label filter unsupported');
@@ -17,11 +33,28 @@ function fakeOctokit(issues: FakeIssue[], opts: { failLabelFilter?: boolean } = 
     return { data: issues };
   });
   const update = vi.fn(async () => ({ data: {} }));
-  const create = vi.fn(async () => ({
-    data: { html_url: 'https://github.com/octo/repo/issues/42' },
-  }));
-  const octokit = { issues: { listForRepo, update, create } } as unknown as Octokit;
-  return { octokit, listForRepo, update, create };
+  const create = vi.fn(async (params: { labels?: string[] }) => {
+    if (opts.failCreateWithLabels && params.labels !== undefined) {
+      throw labelValidationError();
+    }
+    return { data: { html_url: 'https://github.com/octo/repo/issues/42' } };
+  });
+  const getLabel = vi.fn(async (params: { name: string }) => {
+    if (!(opts.existingLabels ?? []).includes(params.name)) {
+      const err = new Error('Not Found') as Error & { status: number };
+      err.status = 404;
+      throw err;
+    }
+    return { data: {} };
+  });
+  const createLabel = vi.fn(async () => {
+    if (opts.failCreateLabel) throw labelValidationError();
+    return { data: {} };
+  });
+  const octokit = {
+    issues: { listForRepo, update, create, getLabel, createLabel },
+  } as unknown as Octokit;
+  return { octokit, listForRepo, update, create, getLabel, createLabel };
 }
 
 const REPORT = { title: 'Dead link report', body: 'updated body' };
@@ -146,6 +179,56 @@ describe('upsertReportIssue', () => {
     expect(update).toHaveBeenCalledWith(expect.objectContaining({ issue_number: 11 }));
     expect(create).not.toHaveBeenCalled();
     expect(result).toEqual({ url: existing.html_url, created: false });
+  });
+
+  it('creates missing labels in the target repo before filing the issue', async () => {
+    const { octokit, create, createLabel } = fakeOctokit([]);
+
+    await upsertReportIssue(octokit, 'octo/repo', { ...REPORT, labels: ['links'] });
+
+    expect(createLabel).toHaveBeenCalledWith(
+      expect.objectContaining({ owner: 'octo', repo: 'repo', name: 'repo-janitor' }),
+    );
+    expect(createLabel).toHaveBeenCalledWith(expect.objectContaining({ name: 'links' }));
+    expect(create).toHaveBeenCalledWith(
+      expect.objectContaining({ labels: ['repo-janitor', 'links'] }),
+    );
+  });
+
+  it('does not recreate labels that already exist', async () => {
+    const { octokit, createLabel } = fakeOctokit([], {
+      existingLabels: ['repo-janitor'],
+    });
+
+    await upsertReportIssue(octokit, 'octo/repo', REPORT);
+
+    expect(createLabel).not.toHaveBeenCalled();
+  });
+
+  it('files the report unlabeled when labels cannot be created', async () => {
+    const { octokit, create } = fakeOctokit([], {
+      failCreateLabel: true,
+      failCreateWithLabels: true,
+    });
+
+    const result = await upsertReportIssue(octokit, 'octo/repo', REPORT);
+
+    expect(create).toHaveBeenCalledTimes(2);
+    expect(create).toHaveBeenLastCalledWith({
+      owner: 'octo',
+      repo: 'repo',
+      title: REPORT.title,
+      body: REPORT.body,
+    });
+    expect(result).toEqual({ url: 'https://github.com/octo/repo/issues/42', created: true });
+  });
+
+  it('rethrows non-label creation failures', async () => {
+    const { octokit, create } = fakeOctokit([]);
+    create.mockRejectedValueOnce(Object.assign(new Error('Server Error'), { status: 500 }));
+
+    await expect(upsertReportIssue(octokit, 'octo/repo', REPORT)).rejects.toThrow('Server Error');
+    expect(create).toHaveBeenCalledTimes(1);
   });
 
   it('rejects invalid target repo names', async () => {
