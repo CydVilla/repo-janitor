@@ -29,9 +29,15 @@ jobs:
         with:
           node-version: 22
           cache: npm
+      # Target repos may use pnpm or yarn, which the runner image doesn't
+      # provide — corepack shims both and resolves each repo's pinned version.
+      - run: corepack enable
       - run: npm ci
       - name: Dead code sweep
         run: npm run deadcode
         env:
           JANITOR_TOKEN: ${{ secrets.JANITOR_TOKEN }}
           GITHUB_TOKEN: ${{ github.token }}
+          # Corepack may need to download the target repo's package manager;
+          # never block CI on its interactive download prompt.
+          COREPACK_ENABLE_DOWNLOAD_PROMPT: '0'
