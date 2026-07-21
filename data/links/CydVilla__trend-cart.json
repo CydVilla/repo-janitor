@@ -1,17 +1,17 @@
 {
   "repo": "CydVilla/trend-cart",
-  "updatedAt": "2026-07-20T07:24:54.469Z",
+  "updatedAt": "2026-07-21T07:13:21.358Z",
   "links": {
     "https://bsky.app/profile/did:plc:xyz/post/rkey": {
       "url": "https://bsky.app/profile/did:plc:xyz/post/rkey",
       "state": "broken",
       "firstSeenAt": "2026-07-17T07:05:24.554Z",
-      "lastCheckedAt": "2026-07-20T07:24:54.469Z",
+      "lastCheckedAt": "2026-07-21T07:13:21.358Z",
       "lastOkAt": null,
       "lastStatusCode": 404,
-      "consecutiveFailures": 5,
-      "totalChecks": 5,
-      "totalFailures": 5,
+      "consecutiveFailures": 6,
+      "totalChecks": 6,
+      "totalFailures": 6,
       "occurrences": [
         {
           "file": "apps/web/app/(dashboard)/ui.tsx",
@@ -43,6 +43,11 @@
           "at": "2026-07-20T07:24:53.950Z",
           "ok": false,
           "statusCode": 404
+        },
+        {
+          "at": "2026-07-21T07:13:20.369Z",
+          "ok": false,
+          "statusCode": 404
         }
       ]
     },
@@ -50,12 +55,12 @@
       "url": "https://bsky.app/profile/trend-cart.bsky.social",
       "state": "broken",
       "firstSeenAt": "2026-07-17T07:05:24.554Z",
-      "lastCheckedAt": "2026-07-20T07:24:54.469Z",
+      "lastCheckedAt": "2026-07-21T07:13:21.358Z",
       "lastOkAt": null,
       "lastStatusCode": 404,
-      "consecutiveFailures": 5,
-      "totalChecks": 5,
-      "totalFailures": 5,
+      "consecutiveFailures": 6,
+      "totalChecks": 6,
+      "totalFailures": 6,
       "occurrences": [
         {
           "file": "apps/web/app/about/page.tsx",
@@ -87,6 +92,11 @@
           "at": "2026-07-20T07:24:54.338Z",
           "ok": false,
           "statusCode": 404
+        },
+        {
+          "at": "2026-07-21T07:13:20.842Z",
+          "ok": false,
+          "statusCode": 404
         }
       ]
     },
@@ -94,11 +104,11 @@
       "url": "https://bsky.social",
       "state": "ok",
       "firstSeenAt": "2026-07-17T07:05:24.554Z",
-      "lastCheckedAt": "2026-07-20T07:24:54.469Z",
-      "lastOkAt": "2026-07-20T07:24:54.469Z",
+      "lastCheckedAt": "2026-07-21T07:13:21.358Z",
+      "lastOkAt": "2026-07-21T07:13:21.358Z",
       "lastStatusCode": 200,
       "consecutiveFailures": 0,
-      "totalChecks": 5,
+      "totalChecks": 6,
       "totalFailures": 0,
       "occurrences": [
         {
@@ -151,6 +161,11 @@
           "at": "2026-07-20T07:24:54.469Z",
           "ok": true,
           "statusCode": 200
+        },
+        {
+          "at": "2026-07-21T07:13:21.358Z",
+          "ok": true,
+          "statusCode": 200
         }
       ],
       "redirectedTo": "https://bsky.social/about"
@@ -159,11 +174,11 @@
       "url": "https://keepachangelog.com",
       "state": "ok",
       "firstSeenAt": "2026-07-17T07:05:24.554Z",
-      "lastCheckedAt": "2026-07-20T07:24:54.469Z",
-      "lastOkAt": "2026-07-20T07:24:54.469Z",
+      "lastCheckedAt": "2026-07-21T07:13:21.358Z",
+      "lastOkAt": "2026-07-21T07:13:21.358Z",
       "lastStatusCode": 200,
       "consecutiveFailures": 0,
-      "totalChecks": 5,
+      "totalChecks": 6,
       "totalFailures": 0,
       "occurrences": [
         {
@@ -196,6 +211,11 @@
           "at": "2026-07-20T07:24:53.921Z",
           "ok": true,
           "statusCode": 200
+        },
+        {
+          "at": "2026-07-21T07:13:20.228Z",
+          "ok": true,
+          "statusCode": 200
         }
       ]
     },
@@ -203,11 +223,11 @@
       "url": "https://resend.com",
       "state": "ok",
       "firstSeenAt": "2026-07-17T07:05:24.554Z",
-      "lastCheckedAt": "2026-07-20T07:24:54.469Z",
-      "lastOkAt": "2026-07-20T07:24:54.469Z",
+      "lastCheckedAt": "2026-07-21T07:13:21.358Z",
+      "lastOkAt": "2026-07-21T07:13:21.358Z",
       "lastStatusCode": 200,
       "consecutiveFailures": 0,
-      "totalChecks": 5,
+      "totalChecks": 6,
       "totalFailures": 0,
       "occurrences": [
         {
@@ -240,6 +260,11 @@
           "at": "2026-07-20T07:24:54.301Z",
           "ok": true,
           "statusCode": 200
+        },
+        {
+          "at": "2026-07-21T07:13:20.363Z",
+          "ok": true,
+          "statusCode": 200
         }
       ]
     },
@@ -247,11 +272,11 @@
       "url": "https://slickdeals.net/newsearch.php?mode=frontpage&searcharea=deals&searchin=first&rss=1",
       "state": "ok",
       "firstSeenAt": "2026-07-17T07:05:24.554Z",
-      "lastCheckedAt": "2026-07-20T07:24:54.469Z",
-      "lastOkAt": "2026-07-20T07:24:54.469Z",
+      "lastCheckedAt": "2026-07-21T07:13:21.358Z",
+      "lastOkAt": "2026-07-21T07:13:21.358Z",
       "lastStatusCode": 200,
       "consecutiveFailures": 0,
-      "totalChecks": 5,
+      "totalChecks": 6,
       "totalFailures": 0,
       "occurrences": [
         {
@@ -286,6 +311,11 @@
         },
         {
           "at": "2026-07-20T07:24:54.408Z",
+          "ok": true,
+          "statusCode": 200
+        },
+        {
+          "at": "2026-07-21T07:13:20.665Z",
           "ok": true,
           "statusCode": 200
         }
