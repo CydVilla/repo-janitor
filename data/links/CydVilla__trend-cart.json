@@ -1,17 +1,17 @@
 {
   "repo": "CydVilla/trend-cart",
-  "updatedAt": "2026-07-24T07:12:29.081Z",
+  "updatedAt": "2026-07-25T07:05:22.250Z",
   "links": {
     "https://bsky.app/profile/did:plc:xyz/post/rkey": {
       "url": "https://bsky.app/profile/did:plc:xyz/post/rkey",
       "state": "broken",
       "firstSeenAt": "2026-07-17T07:05:24.554Z",
-      "lastCheckedAt": "2026-07-24T07:12:29.081Z",
+      "lastCheckedAt": "2026-07-25T07:05:22.250Z",
       "lastOkAt": null,
       "lastStatusCode": 404,
-      "consecutiveFailures": 9,
-      "totalChecks": 9,
-      "totalFailures": 9,
+      "consecutiveFailures": 10,
+      "totalChecks": 10,
+      "totalFailures": 10,
       "occurrences": [
         {
           "file": "apps/web/app/(dashboard)/ui.tsx",
@@ -63,6 +63,11 @@
           "at": "2026-07-24T07:12:23.540Z",
           "ok": false,
           "statusCode": 404
+        },
+        {
+          "at": "2026-07-25T07:05:16.930Z",
+          "ok": false,
+          "statusCode": 404
         }
       ]
     },
@@ -70,11 +75,11 @@
       "url": "https://bsky.social",
       "state": "ok",
       "firstSeenAt": "2026-07-17T07:05:24.554Z",
-      "lastCheckedAt": "2026-07-24T07:12:29.081Z",
-      "lastOkAt": "2026-07-24T07:12:29.081Z",
+      "lastCheckedAt": "2026-07-25T07:05:22.250Z",
+      "lastOkAt": "2026-07-25T07:05:22.250Z",
       "lastStatusCode": 200,
       "consecutiveFailures": 0,
-      "totalChecks": 9,
+      "totalChecks": 10,
       "totalFailures": 0,
       "occurrences": [
         {
@@ -151,6 +156,11 @@
           "at": "2026-07-24T07:12:23.661Z",
           "ok": true,
           "statusCode": 200
+        },
+        {
+          "at": "2026-07-25T07:05:17.261Z",
+          "ok": true,
+          "statusCode": 200
         }
       ],
       "redirectedTo": "https://bsky.social/about"
@@ -159,11 +169,11 @@
       "url": "https://keepachangelog.com",
       "state": "ok",
       "firstSeenAt": "2026-07-17T07:05:24.554Z",
-      "lastCheckedAt": "2026-07-24T07:12:29.081Z",
-      "lastOkAt": "2026-07-24T07:12:29.081Z",
+      "lastCheckedAt": "2026-07-25T07:05:22.250Z",
+      "lastOkAt": "2026-07-25T07:05:22.250Z",
       "lastStatusCode": 200,
       "consecutiveFailures": 0,
-      "totalChecks": 9,
+      "totalChecks": 10,
       "totalFailures": 0,
       "occurrences": [
         {
@@ -216,6 +226,11 @@
           "at": "2026-07-24T07:12:23.483Z",
           "ok": true,
           "statusCode": 200
+        },
+        {
+          "at": "2026-07-25T07:05:16.818Z",
+          "ok": true,
+          "statusCode": 200
         }
       ]
     },
@@ -223,11 +238,11 @@
       "url": "https://resend.com",
       "state": "ok",
       "firstSeenAt": "2026-07-17T07:05:24.554Z",
-      "lastCheckedAt": "2026-07-24T07:12:29.081Z",
-      "lastOkAt": "2026-07-24T07:12:29.081Z",
+      "lastCheckedAt": "2026-07-25T07:05:22.250Z",
+      "lastOkAt": "2026-07-25T07:05:22.250Z",
       "lastStatusCode": 200,
       "consecutiveFailures": 0,
-      "totalChecks": 9,
+      "totalChecks": 10,
       "totalFailures": 0,
       "occurrences": [
         {
@@ -280,6 +295,11 @@
           "at": "2026-07-24T07:12:23.903Z",
           "ok": true,
           "statusCode": 200
+        },
+        {
+          "at": "2026-07-25T07:05:16.900Z",
+          "ok": true,
+          "statusCode": 200
         }
       ]
     },
@@ -287,12 +307,12 @@
       "url": "https://slickdeals.net/deal/123",
       "state": "broken",
       "firstSeenAt": "2026-07-22T07:13:52.461Z",
-      "lastCheckedAt": "2026-07-24T07:12:29.081Z",
+      "lastCheckedAt": "2026-07-25T07:05:22.250Z",
       "lastOkAt": null,
       "lastStatusCode": 404,
-      "consecutiveFailures": 3,
-      "totalChecks": 3,
-      "totalFailures": 3,
+      "consecutiveFailures": 4,
+      "totalChecks": 4,
+      "totalFailures": 4,
       "occurrences": [
         {
           "file": "apps/worker/src/deals/rss.test.ts",
@@ -314,6 +334,11 @@
           "at": "2026-07-24T07:12:24.277Z",
           "ok": false,
           "statusCode": 404
+        },
+        {
+          "at": "2026-07-25T07:05:17.463Z",
+          "ok": false,
+          "statusCode": 404
         }
       ]
     },
@@ -321,12 +346,12 @@
       "url": "https://slickdeals.net/f/1",
       "state": "failing",
       "firstSeenAt": "2026-07-24T07:12:29.081Z",
-      "lastCheckedAt": "2026-07-24T07:12:29.081Z",
+      "lastCheckedAt": "2026-07-25T07:05:22.250Z",
       "lastOkAt": null,
       "lastStatusCode": 404,
-      "consecutiveFailures": 1,
-      "totalChecks": 1,
-      "totalFailures": 1,
+      "consecutiveFailures": 2,
+      "totalChecks": 2,
+      "totalFailures": 2,
       "occurrences": [
         {
           "file": "apps/worker/src/factcheck.test.ts",
@@ -338,6 +363,11 @@
           "at": "2026-07-24T07:12:25.756Z",
           "ok": false,
           "statusCode": 404
+        },
+        {
+          "at": "2026-07-25T07:05:19.000Z",
+          "ok": false,
+          "statusCode": 404
         }
       ]
     },
@@ -345,12 +375,12 @@
       "url": "https://slickdeals.net/f/123-switch-controller",
       "state": "broken",
       "firstSeenAt": "2026-07-22T07:13:52.461Z",
-      "lastCheckedAt": "2026-07-24T07:12:29.081Z",
+      "lastCheckedAt": "2026-07-25T07:05:22.250Z",
       "lastOkAt": null,
       "lastStatusCode": 404,
-      "consecutiveFailures": 3,
-      "totalChecks": 3,
-      "totalFailures": 3,
+      "consecutiveFailures": 4,
+      "totalChecks": 4,
+      "totalFailures": 4,
       "occurrences": [
         {
           "file": "apps/worker/src/factcheck.test.ts",
@@ -372,6 +402,11 @@
           "at": "2026-07-24T07:12:27.315Z",
           "ok": false,
           "statusCode": 404
+        },
+        {
+          "at": "2026-07-25T07:05:20.589Z",
+          "ok": false,
+          "statusCode": 404
         }
       ]
     },
@@ -379,11 +414,11 @@
       "url": "https://slickdeals.net/newsearch.php?mode=frontpage&searcharea=deals&searchin=first&rss=1",
       "state": "ok",
       "firstSeenAt": "2026-07-17T07:05:24.554Z",
-      "lastCheckedAt": "2026-07-24T07:12:29.081Z",
-      "lastOkAt": "2026-07-24T07:12:29.081Z",
+      "lastCheckedAt": "2026-07-25T07:05:22.250Z",
+      "lastOkAt": "2026-07-25T07:05:22.250Z",
       "lastStatusCode": 200,
       "consecutiveFailures": 0,
-      "totalChecks": 9,
+      "totalChecks": 10,
       "totalFailures": 0,
       "occurrences": [
         {
@@ -440,6 +475,11 @@
           "at": "2026-07-24T07:12:23.921Z",
           "ok": true,
           "statusCode": 200
+        },
+        {
+          "at": "2026-07-25T07:05:17.110Z",
+          "ok": true,
+          "statusCode": 200
         }
       ]
     },
@@ -447,11 +487,11 @@
       "url": "https://slickdeals.net/newsearch.php?q=amazon&searcharea=deals&searchin=first&rss=1",
       "state": "ok",
       "firstSeenAt": "2026-07-24T07:12:29.081Z",
-      "lastCheckedAt": "2026-07-24T07:12:29.081Z",
-      "lastOkAt": "2026-07-24T07:12:29.081Z",
+      "lastCheckedAt": "2026-07-25T07:05:22.250Z",
+      "lastOkAt": "2026-07-25T07:05:22.250Z",
       "lastStatusCode": 200,
       "consecutiveFailures": 0,
-      "totalChecks": 1,
+      "totalChecks": 2,
       "totalFailures": 0,
       "occurrences": [
         {
@@ -462,6 +502,11 @@
       "history": [
         {
           "at": "2026-07-24T07:12:29.080Z",
+          "ok": true,
+          "statusCode": 200
+        },
+        {
+          "at": "2026-07-25T07:05:22.249Z",
           "ok": true,
           "statusCode": 200
         }
