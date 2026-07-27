@@ -109,15 +109,26 @@ function comment(body: string, overrides: Partial<FakeComment> = {}): FakeCommen
   };
 }
 
-function fakeOctokit(issues: Array<{ number: number; title: string }>, comments: FakeComment[]) {
-  const listForRepo = vi.fn(async () => ({
-    data: issues.map((i) => ({ ...i, html_url: `https://github.com/octo/site/issues/${i.number}` })),
+function fakeOctokit(
+  issues: Array<{ number: number; title: string; state?: 'open' | 'closed' }>,
+  comments: FakeComment[],
+  commentsByIssue?: Record<number, FakeComment[]>,
+) {
+  const listForRepo = vi.fn(async (params: { state?: string }) => ({
+    data: issues
+      // The live API filters by state; the ledger must request 'all' to see
+      // closed report issues, so the mock has to honor the distinction.
+      .filter((i) => params.state === 'all' || (i.state ?? 'open') === 'open')
+      .map((i) => ({ ...i, html_url: `https://github.com/octo/site/issues/${i.number}` })),
   }));
-  const listComments = vi.fn(async (params: { page?: number; per_page?: number }) => {
-    const page = params.page ?? 1;
-    const perPage = params.per_page ?? 100;
-    return { data: comments.slice((page - 1) * perPage, page * perPage) };
-  });
+  const listComments = vi.fn(
+    async (params: { issue_number?: number; page?: number; per_page?: number }) => {
+      const source = commentsByIssue?.[params.issue_number ?? -1] ?? comments;
+      const page = params.page ?? 1;
+      const perPage = params.per_page ?? 100;
+      return { data: source.slice((page - 1) * perPage, page * perPage) };
+    },
+  );
   const octokit = { issues: { listForRepo, listComments } } as unknown as Octokit;
   return { octokit, listForRepo, listComments };
 }
@@ -211,6 +222,33 @@ describe('fetchFalsePositiveReports', () => {
       {},
     );
     expect(listComments).not.toHaveBeenCalled();
+  });
+
+  it('reads directives from a CLOSED report issue (closing must not orphan the ledger)', async () => {
+    const { octokit } = fakeOctokit(
+      [{ number: 1, title: ISSUE_TITLE, state: 'closed' }],
+      [comment(`/false-positive ${URL_A}`)],
+    );
+    const reports = await fetchFalsePositiveReports(octokit, 'octo/site', ISSUE_TITLE);
+    expect(Object.keys(reports)).toEqual([URL_A]);
+  });
+
+  it('aggregates directives across closed and open report issues, oldest issue first', async () => {
+    // Issue 1 (closed) marks A and B; issue 3 (the current open report)
+    // unmarks B. The union must be: A suppressed, B live again.
+    const { octokit } = fakeOctokit(
+      [
+        { number: 3, title: ISSUE_TITLE, state: 'open' },
+        { number: 1, title: ISSUE_TITLE, state: 'closed' },
+      ],
+      [],
+      {
+        1: [comment(`/false-positive ${URL_A}`), comment(`/false-positive ${URL_B}`)],
+        3: [comment(`/not-false-positive ${URL_B}`)],
+      },
+    );
+    const reports = await fetchFalsePositiveReports(octokit, 'octo/site', ISSUE_TITLE);
+    expect(Object.keys(reports)).toEqual([URL_A]);
   });
 });
 

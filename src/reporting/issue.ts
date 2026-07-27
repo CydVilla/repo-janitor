@@ -13,14 +13,19 @@ interface IssueLite {
   pull_request?: unknown;
 }
 
-async function listOpenCandidates(octokit: Octokit, owner: string, repo: string): Promise<IssueLite[]> {
-  const base = { owner, repo, state: 'open' as const, per_page: 100 };
+async function listCandidates(
+  octokit: Octokit,
+  owner: string,
+  repo: string,
+  state: 'open' | 'all',
+): Promise<IssueLite[]> {
+  const base = { owner, repo, state, per_page: 100 };
   try {
     const res = await octokit.issues.listForRepo({ ...base, labels: JANITOR_LABEL });
     return res.data;
   } catch {
     // The label may not exist yet in the target repo; some setups error on a
-    // filter for a missing label. Fall back to scanning all open issues —
+    // filter for a missing label. Fall back to scanning all issues —
     // exact-title matching below still prevents duplicates.
     const res = await octokit.issues.listForRepo(base);
     return res.data;
@@ -38,9 +43,29 @@ export async function findOpenReportIssue(
   title: string,
 ): Promise<{ number: number; url: string } | null> {
   const { owner, name } = parseRepo(targetRepo);
-  const candidates = await listOpenCandidates(octokit, owner, name);
+  const candidates = await listCandidates(octokit, owner, name, 'open');
   const existing = candidates.find((issue) => issue.title === title && !issue.pull_request);
   return existing ? { number: existing.number, url: existing.html_url } : null;
+}
+
+/**
+ * Every report issue with this exact title — open AND closed — oldest first.
+ * The false-positive ledger is read across all of them: a human closing a
+ * report issue (natural once it looks resolved) must never orphan the
+ * directives recorded on its thread. The next scan simply opens a fresh
+ * report issue, and the old thread keeps counting.
+ */
+export async function listReportIssues(
+  octokit: Octokit,
+  targetRepo: string,
+  title: string,
+): Promise<Array<{ number: number; url: string }>> {
+  const { owner, name } = parseRepo(targetRepo);
+  const candidates = await listCandidates(octokit, owner, name, 'all');
+  return candidates
+    .filter((issue) => issue.title === title && !issue.pull_request)
+    .sort((a, b) => a.number - b.number)
+    .map((issue) => ({ number: issue.number, url: issue.html_url }));
 }
 
 /**
@@ -58,7 +83,7 @@ export async function upsertReportIssue(
 ): Promise<{ url: string; created: boolean }> {
   const { owner, name } = parseRepo(targetRepo);
 
-  const candidates = await listOpenCandidates(octokit, owner, name);
+  const candidates = await listCandidates(octokit, owner, name, 'open');
   const existing = candidates.find((issue) => issue.title === opts.title && !issue.pull_request);
 
   if (existing) {

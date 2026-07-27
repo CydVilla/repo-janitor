@@ -1,7 +1,7 @@
 import type { Octokit } from '@octokit/rest';
 import type { FalsePositiveReport, LinkRecord } from '../types.js';
 import { parseRepo } from '../github.js';
-import { findOpenReportIssue } from '../reporting/issue.js';
+import { listReportIssues } from '../reporting/issue.js';
 
 const COMMENTS_PER_PAGE = 100;
 
@@ -53,52 +53,59 @@ function unwrapUrl(token: string): string {
 }
 
 /**
- * Read false-positive reports from the comments of the open report issue.
+ * Read false-positive reports from the comments of EVERY report issue with
+ * this title — open and closed alike. The upsert flow only ever updates the
+ * open issue, but a human will eventually close a resolved-looking report;
+ * directives recorded on a closed thread must keep counting, or closing the
+ * issue silently un-suppresses everything and the next scan re-reports it.
  *
- * Comments are processed oldest-first (GitHub's default order), and within a
- * comment top-to-bottom, so the latest directive for a URL wins — commenting
+ * Issues are processed oldest-first, and within each issue comments are
+ * processed oldest-first (GitHub's default order) and top-to-bottom within a
+ * comment, so the latest directive for a URL wins — commenting
  * `/not-false-positive <url>` re-enables reporting. Deleting the marking
  * comment has the same effect, because the map is rebuilt from the live
- * comment thread on every scan.
+ * comment threads on every scan.
  *
- * Returns an empty map when the report issue does not exist (nothing to read
- * reports from yet).
+ * Returns an empty map when no report issue has ever existed (nothing to
+ * read reports from yet).
  */
 export async function fetchFalsePositiveReports(
   octokit: Octokit,
   targetRepo: string,
   issueTitle: string,
 ): Promise<Record<string, FalsePositiveReport>> {
-  const issue = await findOpenReportIssue(octokit, targetRepo, issueTitle);
-  if (!issue) return {};
+  const issues = await listReportIssues(octokit, targetRepo, issueTitle);
+  if (issues.length === 0) return {};
 
   const { owner, name } = parseRepo(targetRepo);
   const reports: Record<string, FalsePositiveReport> = {};
 
-  for (let page = 1; ; page += 1) {
-    const res = await octokit.issues.listComments({
-      owner,
-      repo: name,
-      issue_number: issue.number,
-      per_page: COMMENTS_PER_PAGE,
-      page,
-    });
-    for (const comment of res.data) {
-      if (!comment.body) continue;
-      for (const directive of parseFalsePositiveDirectives(comment.body)) {
-        if (directive.action === 'unmark') {
-          delete reports[directive.url];
-        } else {
-          reports[directive.url] = {
-            url: directive.url,
-            reportedBy: comment.user?.login ?? 'unknown',
-            reportedAt: comment.created_at,
-            commentUrl: comment.html_url,
-          };
+  for (const issue of issues) {
+    for (let page = 1; ; page += 1) {
+      const res = await octokit.issues.listComments({
+        owner,
+        repo: name,
+        issue_number: issue.number,
+        per_page: COMMENTS_PER_PAGE,
+        page,
+      });
+      for (const comment of res.data) {
+        if (!comment.body) continue;
+        for (const directive of parseFalsePositiveDirectives(comment.body)) {
+          if (directive.action === 'unmark') {
+            delete reports[directive.url];
+          } else {
+            reports[directive.url] = {
+              url: directive.url,
+              reportedBy: comment.user?.login ?? 'unknown',
+              reportedAt: comment.created_at,
+              commentUrl: comment.html_url,
+            };
+          }
         }
       }
+      if (res.data.length < COMMENTS_PER_PAGE) break;
     }
-    if (res.data.length < COMMENTS_PER_PAGE) break;
   }
 
   return reports;

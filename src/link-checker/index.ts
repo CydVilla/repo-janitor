@@ -75,10 +75,11 @@ async function scanOneRepo(
     });
 
     // False-positive reports live as `/false-positive <url>` comments on the
-    // report issue; rebuild the suppression map from the live thread each run
-    // so marking, unmarking, and comment deletion all take effect on the next
-    // scan. When the thread can't be read (or there is no report issue), fall
-    // back to the map persisted by the previous run rather than un-suppressing
+    // report issues — ALL of them, open and closed, so closing a report issue
+    // never orphans its directives. Rebuild the suppression map from the live
+    // threads each run so marking, unmarking, and comment deletion all take
+    // effect on the next scan. When the threads can't be read, fall back to
+    // the map persisted by the previous run rather than un-suppressing
     // everything.
     let falsePositives = previous?.falsePositives ?? {};
     if (repoConfig.links.report === 'issue') {
