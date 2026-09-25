@@ -1,17 +1,17 @@
 {
   "repo": "CydVilla/trend-cart",
-  "updatedAt": "2026-09-24T06:45:07.070Z",
+  "updatedAt": "2026-09-25T06:46:19.435Z",
   "links": {
     "http://www.bsky.app/profile/wario64.bsky.social": {
       "url": "http://www.bsky.app/profile/wario64.bsky.social",
-      "state": "failing",
+      "state": "broken",
       "firstSeenAt": "2026-09-23T06:45:14.726Z",
-      "lastCheckedAt": "2026-09-24T06:45:07.070Z",
+      "lastCheckedAt": "2026-09-25T06:46:19.435Z",
       "lastOkAt": null,
       "lastStatusCode": null,
-      "consecutiveFailures": 2,
-      "totalChecks": 2,
-      "totalFailures": 2,
+      "consecutiveFailures": 3,
+      "totalChecks": 3,
+      "totalFailures": 3,
       "occurrences": [
         {
           "file": "apps/worker/src/deals/curated.test.ts",
@@ -26,6 +26,10 @@
         {
           "at": "2026-09-24T06:45:02.180Z",
           "ok": false
+        },
+        {
+          "at": "2026-09-25T06:46:15.558Z",
+          "ok": false
         }
       ]
     },
@@ -33,11 +37,11 @@
       "url": "https://amzn.to/4yR60yW",
       "state": "ok",
       "firstSeenAt": "2026-09-23T06:45:14.726Z",
-      "lastCheckedAt": "2026-09-24T06:45:07.070Z",
-      "lastOkAt": "2026-09-24T06:45:07.070Z",
+      "lastCheckedAt": "2026-09-25T06:46:19.435Z",
+      "lastOkAt": "2026-09-25T06:46:19.435Z",
       "lastStatusCode": 200,
       "consecutiveFailures": 0,
-      "totalChecks": 2,
+      "totalChecks": 3,
       "totalFailures": 0,
       "occurrences": [
         {
@@ -71,6 +75,11 @@
           "at": "2026-09-24T06:45:00.934Z",
           "ok": true,
           "statusCode": 200
+        },
+        {
+          "at": "2026-09-25T06:46:14.322Z",
+          "ok": true,
+          "statusCode": 200
         }
       ],
       "redirectedTo": "https://www.amazon.com/dp/B0HJ6GH7B8/ref=as_li_ss_tl?ie=UTF8&smid=ATVPDKIKX0DER&th=1&linkCode=sl1&tag=sec2002-20"
@@ -79,11 +88,11 @@
       "url": "https://amzn.to/a",
       "state": "ok",
       "firstSeenAt": "2026-09-23T06:45:14.726Z",
-      "lastCheckedAt": "2026-09-24T06:45:07.070Z",
-      "lastOkAt": "2026-09-24T06:45:07.070Z",
+      "lastCheckedAt": "2026-09-25T06:46:19.435Z",
+      "lastOkAt": "2026-09-25T06:46:19.435Z",
       "lastStatusCode": 200,
       "consecutiveFailures": 0,
-      "totalChecks": 2,
+      "totalChecks": 3,
       "totalFailures": 0,
       "occurrences": [
         {
@@ -105,6 +114,11 @@
           "at": "2026-09-24T06:45:03.655Z",
           "ok": true,
           "statusCode": 200
+        },
+        {
+          "at": "2026-09-25T06:46:17.540Z",
+          "ok": true,
+          "statusCode": 200
         }
       ],
       "redirectedTo": "https://www.amazon.it/dp/8832818825?ref=cm_sw_r_ffobk_cso_wa_apan_dp_F85GF4GF6BPTVQ71N5PR&ref_=cm_sw_r_ffobk_cso_wa_apan_dp_F85GF4GF6BPTVQ71N5PR&social_share=cm_sw_r_ffobk_cso_wa_apan_dp_F85GF4GF6BPTVQ71N5PR&bestFormat=true"
@@ -113,11 +127,11 @@
       "url": "https://amzn.to/b",
       "state": "ok",
       "firstSeenAt": "2026-09-23T06:45:14.726Z",
-      "lastCheckedAt": "2026-09-24T06:45:07.070Z",
-      "lastOkAt": "2026-09-24T06:45:07.070Z",
+      "lastCheckedAt": "2026-09-25T06:46:19.435Z",
+      "lastOkAt": "2026-09-25T06:46:19.435Z",
       "lastStatusCode": 200,
       "consecutiveFailures": 0,
-      "totalChecks": 2,
+      "totalChecks": 3,
       "totalFailures": 0,
       "occurrences": [
         {
@@ -139,6 +153,11 @@
           "at": "2026-09-24T06:45:04.348Z",
           "ok": true,
           "statusCode": 200
+        },
+        {
+          "at": "2026-09-25T06:46:18.226Z",
+          "ok": true,
+          "statusCode": 200
         }
       ],
       "redirectedTo": "https://www.amazon.com/"
@@ -147,11 +166,11 @@
       "url": "https://amzn.to/dead",
       "state": "ok",
       "firstSeenAt": "2026-09-23T06:45:14.726Z",
-      "lastCheckedAt": "2026-09-24T06:45:07.070Z",
-      "lastOkAt": "2026-09-24T06:45:07.070Z",
+      "lastCheckedAt": "2026-09-25T06:46:19.435Z",
+      "lastOkAt": "2026-09-25T06:46:19.435Z",
       "lastStatusCode": 200,
       "consecutiveFailures": 0,
-      "totalChecks": 2,
+      "totalChecks": 3,
       "totalFailures": 0,
       "occurrences": [
         {
@@ -173,6 +192,11 @@
           "at": "2026-09-24T06:45:02.882Z",
           "ok": true,
           "statusCode": 200
+        },
+        {
+          "at": "2026-09-25T06:46:16.380Z",
+          "ok": true,
+          "statusCode": 200
         }
       ],
       "redirectedTo": "https://www.amazon.com/"
@@ -181,11 +205,11 @@
       "url": "https://amzn.to/offsite",
       "state": "ok",
       "firstSeenAt": "2026-09-23T06:45:14.726Z",
-      "lastCheckedAt": "2026-09-24T06:45:07.070Z",
-      "lastOkAt": "2026-09-24T06:45:07.070Z",
+      "lastCheckedAt": "2026-09-25T06:46:19.435Z",
+      "lastOkAt": "2026-09-25T06:46:19.435Z",
       "lastStatusCode": 200,
       "consecutiveFailures": 0,
-      "totalChecks": 2,
+      "totalChecks": 3,
       "totalFailures": 0,
       "occurrences": [
         {
@@ -207,6 +231,11 @@
           "at": "2026-09-24T06:45:02.204Z",
           "ok": true,
           "statusCode": 200
+        },
+        {
+          "at": "2026-09-25T06:46:15.691Z",
+          "ok": true,
+          "statusCode": 200
         }
       ],
       "redirectedTo": "https://www.amazon.com/"
@@ -215,11 +244,11 @@
       "url": "https://amzn.to/store",
       "state": "ok",
       "firstSeenAt": "2026-09-23T06:45:14.726Z",
-      "lastCheckedAt": "2026-09-24T06:45:07.070Z",
-      "lastOkAt": "2026-09-24T06:45:07.070Z",
+      "lastCheckedAt": "2026-09-25T06:46:19.435Z",
+      "lastOkAt": "2026-09-25T06:46:19.435Z",
       "lastStatusCode": 200,
       "consecutiveFailures": 0,
-      "totalChecks": 2,
+      "totalChecks": 3,
       "totalFailures": 0,
       "occurrences": [
         {
@@ -241,6 +270,11 @@
           "at": "2026-09-24T06:45:01.592Z",
           "ok": true,
           "statusCode": 200
+        },
+        {
+          "at": "2026-09-25T06:46:15.006Z",
+          "ok": true,
+          "statusCode": 200
         }
       ],
       "redirectedTo": "https://www.amazon.com/"
@@ -249,12 +283,12 @@
       "url": "https://api.pinterest.com/v5",
       "state": "broken",
       "firstSeenAt": "2026-07-30T07:14:10.549Z",
-      "lastCheckedAt": "2026-09-24T06:45:07.070Z",
+      "lastCheckedAt": "2026-09-25T06:46:19.435Z",
       "lastOkAt": null,
       "lastStatusCode": 404,
-      "consecutiveFailures": 57,
-      "totalChecks": 57,
-      "totalFailures": 57,
+      "consecutiveFailures": 58,
+      "totalChecks": 58,
+      "totalFailures": 58,
       "occurrences": [
         {
           "file": "apps/worker/src/pinterest/client.ts",
@@ -262,11 +296,6 @@
         }
       ],
       "history": [
-        {
-          "at": "2026-08-06T07:14:57.270Z",
-          "ok": false,
-          "statusCode": 404
-        },
         {
           "at": "2026-08-07T06:44:59.568Z",
           "ok": false,
@@ -511,6 +540,11 @@
           "at": "2026-09-24T06:45:00.695Z",
           "ok": false,
           "statusCode": 404
+        },
+        {
+          "at": "2026-09-25T06:46:14.091Z",
+          "ok": false,
+          "statusCode": 404
         }
       ]
     },
@@ -518,12 +552,12 @@
       "url": "https://api.pinterest.com/v5/oauth/token",
       "state": "broken",
       "firstSeenAt": "2026-07-30T07:14:10.549Z",
-      "lastCheckedAt": "2026-09-24T06:45:07.070Z",
+      "lastCheckedAt": "2026-09-25T06:46:19.435Z",
       "lastOkAt": null,
       "lastStatusCode": 401,
-      "consecutiveFailures": 57,
-      "totalChecks": 57,
-      "totalFailures": 57,
+      "consecutiveFailures": 58,
+      "totalChecks": 58,
+      "totalFailures": 58,
       "occurrences": [
         {
           "file": "apps/worker/scripts/pinterest-auth.ts",
@@ -531,11 +565,6 @@
         }
       ],
       "history": [
-        {
-          "at": "2026-08-06T07:14:56.837Z",
-          "ok": false,
-          "statusCode": 401
-        },
         {
           "at": "2026-08-07T06:44:59.182Z",
           "ok": false,
@@ -780,19 +809,24 @@
           "at": "2026-09-24T06:45:00.369Z",
           "ok": false,
           "statusCode": 401
+        },
+        {
+          "at": "2026-09-25T06:46:13.737Z",
+          "ok": false,
+          "statusCode": 401
         }
       ]
     },
     "https://bsky.app/profile/": {
       "url": "https://bsky.app/profile/",
-      "state": "failing",
+      "state": "broken",
       "firstSeenAt": "2026-09-23T06:45:14.726Z",
-      "lastCheckedAt": "2026-09-24T06:45:07.070Z",
+      "lastCheckedAt": "2026-09-25T06:46:19.435Z",
       "lastOkAt": null,
       "lastStatusCode": 404,
-      "consecutiveFailures": 2,
-      "totalChecks": 2,
-      "totalFailures": 2,
+      "consecutiveFailures": 3,
+      "totalChecks": 3,
+      "totalFailures": 3,
       "occurrences": [
         {
           "file": "docs/adr/0017-curator-account-deals.md",
@@ -817,20 +851,25 @@
           "at": "2026-09-24T06:45:02.370Z",
           "ok": false,
           "statusCode": 404
+        },
+        {
+          "at": "2026-09-25T06:46:16.901Z",
+          "ok": false,
+          "statusCode": 404
         }
       ],
       "redirectedTo": "https://bsky.app/profile"
     },
     "https://bsky.app/profile/Wario64.bsky.social": {
       "url": "https://bsky.app/profile/Wario64.bsky.social",
-      "state": "failing",
+      "state": "broken",
       "firstSeenAt": "2026-09-23T06:45:14.726Z",
-      "lastCheckedAt": "2026-09-24T06:45:07.070Z",
+      "lastCheckedAt": "2026-09-25T06:46:19.435Z",
       "lastOkAt": null,
       "lastStatusCode": 404,
-      "consecutiveFailures": 2,
-      "totalChecks": 2,
-      "totalFailures": 2,
+      "consecutiveFailures": 3,
+      "totalChecks": 3,
+      "totalFailures": 3,
       "occurrences": [
         {
           "file": "packages/shared/src/deals.ts",
@@ -847,19 +886,24 @@
           "at": "2026-09-24T06:45:02.773Z",
           "ok": false,
           "statusCode": 404
+        },
+        {
+          "at": "2026-09-25T06:46:17.327Z",
+          "ok": false,
+          "statusCode": 404
         }
       ]
     },
     "https://bsky.app/profile/Wario64.bsky.social/": {
       "url": "https://bsky.app/profile/Wario64.bsky.social/",
-      "state": "failing",
+      "state": "broken",
       "firstSeenAt": "2026-09-23T06:45:14.726Z",
-      "lastCheckedAt": "2026-09-24T06:45:07.070Z",
+      "lastCheckedAt": "2026-09-25T06:46:19.435Z",
       "lastOkAt": null,
       "lastStatusCode": 404,
-      "consecutiveFailures": 2,
-      "totalChecks": 2,
-      "totalFailures": 2,
+      "consecutiveFailures": 3,
+      "totalChecks": 3,
+      "totalFailures": 3,
       "occurrences": [
         {
           "file": "apps/worker/src/deals/curated.test.ts",
@@ -876,20 +920,25 @@
           "at": "2026-09-24T06:45:01.253Z",
           "ok": false,
           "statusCode": 404
+        },
+        {
+          "at": "2026-09-25T06:46:15.141Z",
+          "ok": false,
+          "statusCode": 404
         }
       ],
       "redirectedTo": "https://bsky.app/profile/Wario64.bsky.social"
     },
     "https://bsky.app/profile/did:plc:knj5sw5al3sukl6vhkpi7637": {
       "url": "https://bsky.app/profile/did:plc:knj5sw5al3sukl6vhkpi7637",
-      "state": "failing",
+      "state": "broken",
       "firstSeenAt": "2026-09-23T06:45:14.726Z",
-      "lastCheckedAt": "2026-09-24T06:45:07.070Z",
+      "lastCheckedAt": "2026-09-25T06:46:19.435Z",
       "lastOkAt": null,
       "lastStatusCode": 404,
-      "consecutiveFailures": 2,
-      "totalChecks": 2,
-      "totalFailures": 2,
+      "consecutiveFailures": 3,
+      "totalChecks": 3,
+      "totalFailures": 3,
       "occurrences": [
         {
           "file": "apps/worker/src/deals/curated.test.ts",
@@ -906,6 +955,11 @@
           "at": "2026-09-24T06:45:01.585Z",
           "ok": false,
           "statusCode": 404
+        },
+        {
+          "at": "2026-09-25T06:46:15.635Z",
+          "ok": false,
+          "statusCode": 404
         }
       ]
     },
@@ -913,12 +967,12 @@
       "url": "https://bsky.app/profile/did:plc:xyz/post/rkey",
       "state": "broken",
       "firstSeenAt": "2026-07-17T07:05:24.554Z",
-      "lastCheckedAt": "2026-09-24T06:45:07.070Z",
+      "lastCheckedAt": "2026-09-25T06:46:19.435Z",
       "lastOkAt": null,
       "lastStatusCode": 404,
-      "consecutiveFailures": 71,
-      "totalChecks": 71,
-      "totalFailures": 71,
+      "consecutiveFailures": 72,
+      "totalChecks": 72,
+      "totalFailures": 72,
       "occurrences": [
         {
           "file": "apps/web/app/(dashboard)/ui.tsx",
@@ -926,11 +980,6 @@
         }
       ],
       "history": [
-        {
-          "at": "2026-08-06T07:14:56.846Z",
-          "ok": false,
-          "statusCode": 404
-        },
         {
           "at": "2026-08-07T06:44:59.072Z",
           "ok": false,
@@ -1175,19 +1224,24 @@
           "at": "2026-09-24T06:45:00.723Z",
           "ok": false,
           "statusCode": 404
+        },
+        {
+          "at": "2026-09-25T06:46:14.358Z",
+          "ok": false,
+          "statusCode": 404
         }
       ]
     },
     "https://bsky.app/profile/wario64.bsky.social": {
       "url": "https://bsky.app/profile/wario64.bsky.social",
-      "state": "failing",
+      "state": "broken",
       "firstSeenAt": "2026-09-23T06:45:14.726Z",
-      "lastCheckedAt": "2026-09-24T06:45:07.070Z",
+      "lastCheckedAt": "2026-09-25T06:46:19.435Z",
       "lastOkAt": null,
       "lastStatusCode": 404,
-      "consecutiveFailures": 2,
-      "totalChecks": 2,
-      "totalFailures": 2,
+      "consecutiveFailures": 3,
+      "totalChecks": 3,
+      "totalFailures": 3,
       "occurrences": [
         {
           "file": "README.md",
@@ -1216,19 +1270,24 @@
           "at": "2026-09-24T06:45:00.318Z",
           "ok": false,
           "statusCode": 404
+        },
+        {
+          "at": "2026-09-25T06:46:13.814Z",
+          "ok": false,
+          "statusCode": 404
         }
       ]
     },
     "https://bsky.app/profile/wario64.bsky.social/post/abc": {
       "url": "https://bsky.app/profile/wario64.bsky.social/post/abc",
-      "state": "failing",
+      "state": "broken",
       "firstSeenAt": "2026-09-23T06:45:14.726Z",
-      "lastCheckedAt": "2026-09-24T06:45:07.070Z",
+      "lastCheckedAt": "2026-09-25T06:46:19.435Z",
       "lastOkAt": null,
       "lastStatusCode": 404,
-      "consecutiveFailures": 2,
-      "totalChecks": 2,
-      "totalFailures": 2,
+      "consecutiveFailures": 3,
+      "totalChecks": 3,
+      "totalFailures": 3,
       "occurrences": [
         {
           "file": "apps/worker/src/deals/curated.test.ts",
@@ -1245,6 +1304,11 @@
           "at": "2026-09-24T06:45:01.889Z",
           "ok": false,
           "statusCode": 404
+        },
+        {
+          "at": "2026-09-25T06:46:16.158Z",
+          "ok": false,
+          "statusCode": 404
         }
       ]
     },
@@ -1252,11 +1316,11 @@
       "url": "https://bsky.social",
       "state": "ok",
       "firstSeenAt": "2026-07-17T07:05:24.554Z",
-      "lastCheckedAt": "2026-09-24T06:45:07.070Z",
-      "lastOkAt": "2026-09-24T06:45:07.070Z",
+      "lastCheckedAt": "2026-09-25T06:46:19.435Z",
+      "lastOkAt": "2026-09-25T06:46:19.435Z",
       "lastStatusCode": 200,
       "consecutiveFailures": 0,
-      "totalChecks": 71,
+      "totalChecks": 72,
       "totalFailures": 0,
       "occurrences": [
         {
@@ -1289,11 +1353,6 @@
         }
       ],
       "history": [
-        {
-          "at": "2026-08-06T07:14:57.315Z",
-          "ok": true,
-          "statusCode": 200
-        },
         {
           "at": "2026-08-07T06:44:59.226Z",
           "ok": true,
@@ -1538,6 +1597,11 @@
           "at": "2026-09-24T06:45:00.609Z",
           "ok": true,
           "statusCode": 200
+        },
+        {
+          "at": "2026-09-25T06:46:14.175Z",
+          "ok": true,
+          "statusCode": 200
         }
       ],
       "redirectedTo": "https://bsky.social/about"
@@ -1546,11 +1610,11 @@
       "url": "https://buff.ly/abc",
       "state": "ok",
       "firstSeenAt": "2026-09-23T06:45:14.726Z",
-      "lastCheckedAt": "2026-09-24T06:45:07.070Z",
-      "lastOkAt": "2026-09-24T06:45:07.070Z",
+      "lastCheckedAt": "2026-09-25T06:46:19.435Z",
+      "lastOkAt": "2026-09-25T06:46:19.435Z",
       "lastStatusCode": 200,
       "consecutiveFailures": 0,
-      "totalChecks": 2,
+      "totalChecks": 3,
       "totalFailures": 0,
       "occurrences": [
         {
@@ -1568,6 +1632,11 @@
           "at": "2026-09-24T06:45:00.967Z",
           "ok": true,
           "statusCode": 200
+        },
+        {
+          "at": "2026-09-25T06:46:14.577Z",
+          "ok": true,
+          "statusCode": 200
         }
       ],
       "redirectedTo": "https://buffer.com/"
@@ -1576,12 +1645,12 @@
       "url": "https://creatorsapi.amazon",
       "state": "broken",
       "firstSeenAt": "2026-08-05T07:14:48.146Z",
-      "lastCheckedAt": "2026-09-24T06:45:07.070Z",
+      "lastCheckedAt": "2026-09-25T06:46:19.435Z",
       "lastOkAt": null,
       "lastStatusCode": 400,
-      "consecutiveFailures": 51,
-      "totalChecks": 51,
-      "totalFailures": 51,
+      "consecutiveFailures": 52,
+      "totalChecks": 52,
+      "totalFailures": 52,
       "occurrences": [
         {
           "file": "apps/worker/src/creators-api.ts",
@@ -1589,11 +1658,6 @@
         }
       ],
       "history": [
-        {
-          "at": "2026-08-06T07:14:57.172Z",
-          "ok": false,
-          "statusCode": 400
-        },
         {
           "at": "2026-08-07T06:44:59.152Z",
           "ok": false,
@@ -1838,19 +1902,24 @@
           "at": "2026-09-24T06:45:00.431Z",
           "ok": false,
           "statusCode": 400
+        },
+        {
+          "at": "2026-09-25T06:46:13.709Z",
+          "ok": false,
+          "statusCode": 400
         }
       ]
     },
     "https://evil.example/dp/B0HJ6GH7B8": {
       "url": "https://evil.example/dp/B0HJ6GH7B8",
-      "state": "failing",
+      "state": "broken",
       "firstSeenAt": "2026-09-23T06:45:14.726Z",
-      "lastCheckedAt": "2026-09-24T06:45:07.070Z",
+      "lastCheckedAt": "2026-09-25T06:46:19.435Z",
       "lastOkAt": null,
       "lastStatusCode": null,
-      "consecutiveFailures": 2,
-      "totalChecks": 2,
-      "totalFailures": 2,
+      "consecutiveFailures": 3,
+      "totalChecks": 3,
+      "totalFailures": 3,
       "occurrences": [
         {
           "file": "apps/worker/src/deals/curated.test.ts",
@@ -1869,6 +1938,10 @@
         {
           "at": "2026-09-24T06:45:02.234Z",
           "ok": false
+        },
+        {
+          "at": "2026-09-25T06:46:15.722Z",
+          "ok": false
         }
       ]
     },
@@ -1876,11 +1949,11 @@
       "url": "https://keepachangelog.com",
       "state": "ok",
       "firstSeenAt": "2026-07-17T07:05:24.554Z",
-      "lastCheckedAt": "2026-09-24T06:45:07.070Z",
-      "lastOkAt": "2026-09-24T06:45:07.070Z",
+      "lastCheckedAt": "2026-09-25T06:46:19.435Z",
+      "lastOkAt": "2026-09-25T06:46:19.435Z",
       "lastStatusCode": 200,
       "consecutiveFailures": 0,
-      "totalChecks": 71,
+      "totalChecks": 72,
       "totalFailures": 0,
       "occurrences": [
         {
@@ -1889,11 +1962,6 @@
         }
       ],
       "history": [
-        {
-          "at": "2026-08-06T07:14:56.801Z",
-          "ok": true,
-          "statusCode": 200
-        },
         {
           "at": "2026-08-07T06:44:59.083Z",
           "ok": true,
@@ -2138,6 +2206,11 @@
           "at": "2026-09-24T06:45:00.388Z",
           "ok": true,
           "statusCode": 200
+        },
+        {
+          "at": "2026-09-25T06:46:13.817Z",
+          "ok": true,
+          "statusCode": 200
         }
       ]
     },
@@ -2145,11 +2218,11 @@
       "url": "https://resend.com",
       "state": "ok",
       "firstSeenAt": "2026-07-17T07:05:24.554Z",
-      "lastCheckedAt": "2026-09-24T06:45:07.070Z",
-      "lastOkAt": "2026-09-24T06:45:07.070Z",
+      "lastCheckedAt": "2026-09-25T06:46:19.435Z",
+      "lastOkAt": "2026-09-25T06:46:19.435Z",
       "lastStatusCode": 200,
       "consecutiveFailures": 0,
-      "totalChecks": 71,
+      "totalChecks": 72,
       "totalFailures": 0,
       "occurrences": [
         {
@@ -2158,11 +2231,6 @@
         }
       ],
       "history": [
-        {
-          "at": "2026-08-06T07:14:57.264Z",
-          "ok": true,
-          "statusCode": 200
-        },
         {
           "at": "2026-08-07T06:44:59.343Z",
           "ok": true,
@@ -2407,6 +2475,11 @@
           "at": "2026-09-24T06:45:00.991Z",
           "ok": true,
           "statusCode": 200
+        },
+        {
+          "at": "2026-09-25T06:46:14.581Z",
+          "ok": true,
+          "statusCode": 200
         }
       ]
     },
@@ -2414,12 +2487,12 @@
       "url": "https://slickdeals.net/deal/123",
       "state": "broken",
       "firstSeenAt": "2026-07-22T07:13:52.461Z",
-      "lastCheckedAt": "2026-09-24T06:45:07.070Z",
+      "lastCheckedAt": "2026-09-25T06:46:19.435Z",
       "lastOkAt": null,
       "lastStatusCode": 404,
-      "consecutiveFailures": 65,
-      "totalChecks": 65,
-      "totalFailures": 65,
+      "consecutiveFailures": 66,
+      "totalChecks": 66,
+      "totalFailures": 66,
       "occurrences": [
         {
           "file": "apps/worker/src/deals/rss.test.ts",
@@ -2427,11 +2500,6 @@
         }
       ],
       "history": [
-        {
-          "at": "2026-08-06T07:14:57.619Z",
-          "ok": false,
-          "statusCode": 404
-        },
         {
           "at": "2026-08-07T06:44:59.912Z",
           "ok": false,
@@ -2676,6 +2744,11 @@
           "at": "2026-09-24T06:45:01.571Z",
           "ok": false,
           "statusCode": 404
+        },
+        {
+          "at": "2026-09-25T06:46:14.819Z",
+          "ok": false,
+          "statusCode": 404
         }
       ]
     },
@@ -2683,12 +2756,12 @@
       "url": "https://slickdeals.net/f/1",
       "state": "broken",
       "firstSeenAt": "2026-07-24T07:12:29.081Z",
-      "lastCheckedAt": "2026-09-24T06:45:07.070Z",
+      "lastCheckedAt": "2026-09-25T06:46:19.435Z",
       "lastOkAt": null,
       "lastStatusCode": 404,
-      "consecutiveFailures": 63,
-      "totalChecks": 63,
-      "totalFailures": 63,
+      "consecutiveFailures": 64,
+      "totalChecks": 64,
+      "totalFailures": 64,
       "occurrences": [
         {
           "file": "apps/worker/src/factcheck.test.ts",
@@ -2696,11 +2769,6 @@
         }
       ],
       "history": [
-        {
-          "at": "2026-08-06T07:14:59.076Z",
-          "ok": false,
-          "statusCode": 404
-        },
         {
           "at": "2026-08-07T06:45:02.366Z",
           "ok": false,
@@ -2945,6 +3013,11 @@
           "at": "2026-09-24T06:45:03.154Z",
           "ok": false,
           "statusCode": 404
+        },
+        {
+          "at": "2026-09-25T06:46:16.306Z",
+          "ok": false,
+          "statusCode": 404
         }
       ]
     },
@@ -2952,12 +3025,12 @@
       "url": "https://slickdeals.net/f/123-switch-controller",
       "state": "broken",
       "firstSeenAt": "2026-07-22T07:13:52.461Z",
-      "lastCheckedAt": "2026-09-24T06:45:07.070Z",
+      "lastCheckedAt": "2026-09-25T06:46:19.435Z",
       "lastOkAt": null,
       "lastStatusCode": 404,
-      "consecutiveFailures": 65,
-      "totalChecks": 65,
-      "totalFailures": 65,
+      "consecutiveFailures": 66,
+      "totalChecks": 66,
+      "totalFailures": 66,
       "occurrences": [
         {
           "file": "apps/worker/src/factcheck.test.ts",
@@ -2965,11 +3038,6 @@
         }
       ],
       "history": [
-        {
-          "at": "2026-08-06T07:15:00.799Z",
-          "ok": false,
-          "statusCode": 404
-        },
         {
           "at": "2026-08-07T06:45:03.941Z",
           "ok": false,
@@ -3214,6 +3282,11 @@
           "at": "2026-09-24T06:45:05.045Z",
           "ok": false,
           "statusCode": 404
+        },
+        {
+          "at": "2026-09-25T06:46:17.687Z",
+          "ok": false,
+          "statusCode": 404
         }
       ]
     },
@@ -3221,11 +3294,11 @@
       "url": "https://slickdeals.net/newsearch.php?mode=frontpage&searcharea=deals&searchin=first&rss=1",
       "state": "ok",
       "firstSeenAt": "2026-07-17T07:05:24.554Z",
-      "lastCheckedAt": "2026-09-24T06:45:07.070Z",
-      "lastOkAt": "2026-09-24T06:45:07.070Z",
+      "lastCheckedAt": "2026-09-25T06:46:19.435Z",
+      "lastOkAt": "2026-09-25T06:46:19.435Z",
       "lastStatusCode": 200,
       "consecutiveFailures": 0,
-      "totalChecks": 71,
+      "totalChecks": 72,
       "totalFailures": 0,
       "occurrences": [
         {
@@ -3238,11 +3311,6 @@
         }
       ],
       "history": [
-        {
-          "at": "2026-08-06T07:14:57.244Z",
-          "ok": true,
-          "statusCode": 200
-        },
         {
           "at": "2026-08-07T06:44:59.539Z",
           "ok": true,
@@ -3487,6 +3555,11 @@
           "at": "2026-09-24T06:45:00.812Z",
           "ok": true,
           "statusCode": 200
+        },
+        {
+          "at": "2026-09-25T06:46:14.162Z",
+          "ok": true,
+          "statusCode": 200
         }
       ]
     },
@@ -3494,11 +3567,11 @@
       "url": "https://slickdeals.net/newsearch.php?q=amazon&searcharea=deals&searchin=first&rss=1",
       "state": "ok",
       "firstSeenAt": "2026-07-24T07:12:29.081Z",
-      "lastCheckedAt": "2026-09-24T06:45:07.070Z",
-      "lastOkAt": "2026-09-24T06:45:07.070Z",
+      "lastCheckedAt": "2026-09-25T06:46:19.435Z",
+      "lastOkAt": "2026-09-25T06:46:19.435Z",
       "lastStatusCode": 200,
       "consecutiveFailures": 0,
-      "totalChecks": 63,
+      "totalChecks": 64,
       "totalFailures": 0,
       "occurrences": [
         {
@@ -3507,11 +3580,6 @@
         }
       ],
       "history": [
-        {
-          "at": "2026-08-06T07:15:02.792Z",
-          "ok": true,
-          "statusCode": 200
-        },
         {
           "at": "2026-08-07T06:45:06.348Z",
           "ok": true,
@@ -3756,19 +3824,24 @@
           "at": "2026-09-24T06:45:07.069Z",
           "ok": true,
           "statusCode": 200
+        },
+        {
+          "at": "2026-09-25T06:46:19.433Z",
+          "ok": true,
+          "statusCode": 200
         }
       ]
     },
     "https://slickdeals.net/rss": {
       "url": "https://slickdeals.net/rss",
-      "state": "failing",
+      "state": "broken",
       "firstSeenAt": "2026-09-23T06:45:14.726Z",
-      "lastCheckedAt": "2026-09-24T06:45:07.070Z",
+      "lastCheckedAt": "2026-09-25T06:46:19.435Z",
       "lastOkAt": null,
       "lastStatusCode": 404,
-      "consecutiveFailures": 2,
-      "totalChecks": 2,
-      "totalFailures": 2,
+      "consecutiveFailures": 3,
+      "totalChecks": 3,
+      "totalFailures": 3,
       "occurrences": [
         {
           "file": "apps/worker/src/deals/curated.test.ts",
@@ -3785,6 +3858,11 @@
           "at": "2026-09-24T06:45:01.192Z",
           "ok": false,
           "statusCode": 404
+        },
+        {
+          "at": "2026-09-25T06:46:14.487Z",
+          "ok": false,
+          "statusCode": 404
         }
       ]
     },
@@ -3792,11 +3870,11 @@
       "url": "https://unpkg.com/knip@5/schema.json",
       "state": "ok",
       "firstSeenAt": "2026-07-28T07:14:45.210Z",
-      "lastCheckedAt": "2026-09-24T06:45:07.070Z",
-      "lastOkAt": "2026-09-24T06:45:07.070Z",
+      "lastCheckedAt": "2026-09-25T06:46:19.435Z",
+      "lastOkAt": "2026-09-25T06:46:19.435Z",
       "lastStatusCode": 200,
       "consecutiveFailures": 0,
-      "totalChecks": 59,
+      "totalChecks": 60,
       "totalFailures": 0,
       "occurrences": [
         {
@@ -3805,11 +3883,6 @@
         }
       ],
       "history": [
-        {
-          "at": "2026-08-06T07:14:57.322Z",
-          "ok": true,
-          "statusCode": 200
-        },
         {
           "at": "2026-08-07T06:44:59.274Z",
           "ok": true,
@@ -4054,6 +4127,11 @@
           "at": "2026-09-24T06:45:00.876Z",
           "ok": true,
           "statusCode": 200
+        },
+        {
+          "at": "2026-09-25T06:46:14.390Z",
+          "ok": true,
+          "statusCode": 200
         }
       ],
       "redirectedTo": "https://unpkg.com/knip@5.88.1/schema.json"
@@ -4062,11 +4140,11 @@
       "url": "https://www.pinterest.com/oauth/?response_type=code",
       "state": "ok",
       "firstSeenAt": "2026-07-30T07:14:10.549Z",
-      "lastCheckedAt": "2026-09-24T06:45:07.070Z",
-      "lastOkAt": "2026-09-24T06:45:07.070Z",
+      "lastCheckedAt": "2026-09-25T06:46:19.435Z",
+      "lastOkAt": "2026-09-25T06:46:19.435Z",
       "lastStatusCode": 200,
       "consecutiveFailures": 0,
-      "totalChecks": 57,
+      "totalChecks": 58,
       "totalFailures": 0,
       "occurrences": [
         {
@@ -4075,11 +4153,6 @@
         }
       ],
       "history": [
-        {
-          "at": "2026-08-06T07:14:57.243Z",
-          "ok": true,
-          "statusCode": 200
-        },
         {
           "at": "2026-08-07T06:44:59.236Z",
           "ok": true,
@@ -4322,6 +4395,11 @@
         },
         {
           "at": "2026-09-24T06:45:00.492Z",
+          "ok": true,
+          "statusCode": 200
+        },
+        {
+          "at": "2026-09-25T06:46:13.878Z",
           "ok": true,
           "statusCode": 200
         }
